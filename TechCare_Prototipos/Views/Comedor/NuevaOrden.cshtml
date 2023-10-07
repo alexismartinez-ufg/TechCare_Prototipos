@@ -1,0 +1,117 @@
+﻿<div class="container">
+        <div class="row">
+            <!-- Sección de Lista de Productos -->
+            <div class="col-lg-6 col-md-7 col-sm-12 mb-3">
+                <h2>Lista de Productos</h2>
+
+                <!-- Acordeón para categorías de productos -->
+                <div class="accordion" id="accordionExample">
+                    <!-- Categoría: Desayunos -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDesayunos">
+                                Desayunos
+                            </button>
+                        </h2>
+                        <div id="collapseDesayunos" class="accordion-collapse collapse show" aria-labelledby="headingDesayunos" >
+                            <div class="accordion-body">
+                                <ul>
+                                    <!-- Genera una lista de productos aleatoria para Desayunos (puedes reemplazar esto con tus datos reales) -->
+                                    <li>Producto 1 (Desayuno)</li>
+                                    <li>Producto 2 (Desayuno)</li>
+                                    <!-- Agrega más elementos según sea necesario -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Almuerzo y Cena -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAlmuerzoCena">
+                                Almuerzo y Cena
+                            </button>
+                        </h2>
+                        <div id="collapseAlmuerzoCena" class="accordion-collapse collapse" aria-labelledby="headingAlmuerzoCena" >
+                            <div class="accordion-body">
+                                <ul>
+                                    <!-- Genera una lista de productos aleatoria para Almuerzo y Cena (puedes reemplazar esto con tus datos reales) -->
+                                    <li>Producto 1 (Almuerzo/Cena)</li>
+                                    <li>Producto 2 (Almuerzo/Cena)</li>
+                                    <!-- Agrega más elementos según sea necesario -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Bebidas -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBebidas">
+                                Bebidas
+                            </button>
+                        </h2>
+                        <div id="collapseBebidas" class="accordion-collapse collapse" aria-labelledby="headingBebidas" >
+                            <div class="accordion-body">
+                                <ul>
+                                    <!-- Genera una lista de productos aleatoria para Bebidas (puedes reemplazar esto con tus datos reales) -->
+                                    <li>Producto 1 (Bebida)</li>
+                                    <li>Producto 2 (Bebida)</li>
+                                    <!-- Agrega más elementos según sea necesario -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Postres -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePostres">
+                                Postres
+                            </button>
+                        </h2>
+                        <div id="collapsePostres" class="accordion-collapse collapse" aria-labelledby="headingPostres" >
+                            <div class="accordion-body">
+                                <ul>
+                                    <!-- Genera una lista de productos aleatoria para Postres (puedes reemplazar esto con tus datos reales) -->
+                                    <li>Producto 1 (Postre)</li>
+                                    <li>Producto 2 (Postre)</li>
+                                    <!-- Agrega más elementos según sea necesario -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-5 col-sm-12">
+                <h2>Características</h2>
+                <div class="mb-3">
+                    <label for="nombreProducto" class="form-label">Nombre del producto:</label>
+                    <input type="text" class="form-control" id="nombreProducto" value="Producto 1" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcionProducto" class="form-label">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcionProducto" value="Descripción del Producto 1" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="precioProducto" class="form-label">Precio:</label>
+                    <input type="text" class="form-control" id="precioProducto" value="$10.00" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="cantidadProducto" class="form-label">Cantidad seleccionada:</label>
+                    <input type="number" class="form-control" id="cantidadProducto" value="1">
+                </div>
+                <div class="mb-3">
+                    <label for="comentarioProducto" class="form-label">Agregar comentario:</label>
+                    <textarea class="form-control" id="comentarioProducto" rows="4" cols="50"></textarea>
+                </div>
+
+                <div class="text-center">
+                    <a href="@Url.Action("Detalle")" class="btn btn-outline-success">Agregar Orden</a>
+                </div>
+                <!-- Agrega más características según sea necesario -->
+            </div>
+
+        </div>
+    </div>

@@ -1,0 +1,27 @@
+﻿<div class="container">
+    <div class="d-flex align-items-center flex-column">
+        <div class="container col-lg-4 col-md-4">
+                <div class="mb-3">
+                    <label for="numeroMesa" class="form-label">Número de Mesa:</label>
+                    <input type="text" class="form-control" id="numeroMesa" value="Ejemplo" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="nombreAtiende" class="form-label">Nombre de quien Atiende:</label>
+                    <input type="text" class="form-control" id="nombreAtiende" value="Ejemplo" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="nombreComensal" class="form-label">Nombre del Comensal a Cargo:</label>
+                    <input type="text" class="form-control" id="nombreComensal" name="nombreComensal" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cantidadPersonas" class="form-label">Cantidad de Personas:</label>
+                    <input type="number" class="form-control" id="cantidadPersonas" name="cantidadPersonas" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaAsignacion" class="form-label">Fecha de Asignación:</label>
+                    <input type="text" class="form-control" id="fechaAsignacion" value="@DateTime.Now.ToString()" disabled>
+                </div>
+                <a href="@Url.Action("Detalle", "Comedor")" class="btn btn-primary">Asignar Mesa</a>
+        </div>
+    </div>
+</div>

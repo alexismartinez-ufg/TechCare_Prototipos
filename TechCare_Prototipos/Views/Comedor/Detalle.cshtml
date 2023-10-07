@@ -1,0 +1,50 @@
+﻿<div class="container">
+    <div class="row">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                    type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="true">Ordenes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                    type="button" role="tab" aria-controls="home-tab-pane" aria-selected="false">Detalle</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="nuevaOrdenButton">Nueva orden</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
+                <div>
+                    <label>Orden 1</label>
+                </div>
+                <div>
+                    <label>Orden 2</label>
+                </div>
+                <div>
+                    <label>Orden 3</label>
+                </div>
+                <div>
+                    <label>Orden 4</label>
+                </div>
+                <div>
+                    <label>Orden 5</label>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+                tabindex="0">
+                <label>A cargo de mesa: Juan</label> <br />
+                <label>Mesa a nombre de: Alberto</label><br />
+                <label>Mesa # numero</label><br />
+                <label>Hora de llegada @DateTime.Now.ToLongDateString()</label><br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("nuevaOrdenButton").addEventListener("click", function () {
+        window.location.href = "@Url.Action("NuevaOrden", "Comedor")";
+    });
+</script>
