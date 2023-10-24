@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Detalle de Venta";
+}
+
+<div class="container my-4">
+    <h1 class="text-center">Detalle de Venta</h1>
+
+    <h2>Mesa</h2>
+    <ul>
+        <li>Número de Mesa: 5</li>
+        <li>Hora de Asignación: 12:45 PM</li>
+        <li>Cantidad de Comensales: 4</li>
+        <li>Comensal a Cargo: Nombre del Cliente</li>
+        <li>Atendido por: Nombre del Mesero</li>
+    </ul>
+
+    <h2>Cuenta</h2>
+    <ul>
+        <li>Hora de Inicio de Cuenta: 1:30 PM</li>
+        <li>Hora de Fin de Cuenta: 3:15 PM</li>
+        <li>Número de Factura o Recibo: 123456</li>
+    </ul>
+
+    <h2>Reserva</h2>
+    <ul>
+        <li>Fecha de Reserva: 2023-10-01</li>
+        <li>Hora de Reserva: 10:00 AM</li>
+        <li>Número de Personas: 4</li>
+    </ul>
+
+    <h3>Órdenes</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Costo</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Ganancia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Producto 1</td>
+                <td>$10</td>
+                <td>$15</td>
+                <td>2</td>
+                <td>$10</td>
+            </tr>
+            <tr>
+                <td>Producto 2</td>
+                <td>$8</td>
+                <td>$12</td>
+                <td>1</td>
+                <td>$4</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>Método de Pago: Tarjeta</li>
+        <li>Total Cancelado: $24</li>
+        <li>Quién Cobró: Nombre del Cajero</li>
+        <li>Hora de Cancelación de Cuenta: 3:15 PM</li>
+    </ul>
+
+    <div class="text-center my-4">
+        <a href="@Url.Action("Index", "Reporte")" class="btn btn-primary">Volver</a>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Crud de Productos";
+}
+
+<div class="container my-4">
+    <h1 class="text-center">Crud de Productos</h1>
+
+    <button id="agregarProductoButton" class="btn btn-success mb-3">Agregar Nuevo Producto</button>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo de Producto</th>
+                <th>Coste</th>
+                <th>Precio Unitario</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Datos de ejemplo quemados -->
+            <tr>
+                <td>1</td>
+                <td>Bebida 1</td>
+                <td>Bebida</td>
+                <td>2.5</td>
+                <td>5.0</td>
+                <td>Bebida refrescante</td>
+                <td>
+                    <a href="#" class="btn btn-primary">Ver Imagen</a>
+                    <a href="#" class="btn btn-warning">Editar</a>
+                    <a href="#" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Postre 1</td>
+                <td>Postre</td>
+                <td>3.0</td>
+                <td>7.0</td>
+                <td>Postre delicioso</td>
+                <td>
+                    <a href="#" class="btn btn-primary">Ver Imagen</a>
+                    <a href="#" class="btn btn-warning">Editar</a>
+                    <a href="#" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog" aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Nuevo Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="nuevoProductoForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoProducto">Tipo de Producto</label>
+                        <select class="form-control" id="tipoProducto" name="tipoProducto" required>
+                            <option value="Bebida">Bebida</option>
+                            <option value="Postre">Postre</option>
+                            <option value="Almuerzo">Almuerzo</option>
+                            <option value="Cena">Cena</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="coste">Coste</label>
+                        <input type="number" class="form-control" id="coste" name="coste" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="precioUnitario">Precio Unitario</label>
+                        <input type="number" class="form-control" id="precioUnitario" name="precioUnitario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="guardarProductoButton" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        // Mostrar el modal al hacer clic en "Agregar Nuevo Producto"
+        $("#agregarProductoButton").click(function () {
+            $("#agregarProductoModal").modal("show");
+        });
+
+        // Mostrar la alerta de éxito al guardar
+        $("#guardarProductoButton").click(function () {
+            // Aquí debes agregar la lógica para guardar el nuevo producto (por ejemplo, una llamada a la API o AJAX)
+            // Una vez guardado el producto, muestra la alerta de éxito utilizando SweetAlert
+            swal("Producto Agregado", "El nuevo producto se ha agregado con éxito.", "success");
+
+            // Cierra el modal
+            $("#agregarProductoModal").modal("hide");
+        });
+    </script>
+}

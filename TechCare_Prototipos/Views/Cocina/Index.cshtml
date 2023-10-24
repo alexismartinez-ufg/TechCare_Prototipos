@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Vista de Cocina";
+}
+
+<div class="container-fluid text-center">
+    <h1 id="clock" class="my-4"></h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        @for (int i = 1; i <= 12; i++)
+        {
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"># Orden: @i</h5>
+                        <p>Mesa: Mesa @i</p>
+                        <p>Nombre del Plato: Plato @i</p>
+                        <p>Hora de Pedido: 12:30 PM</p>
+                        <p>Tiempo de Preparación: 10 min 30 s</p>
+                        <p>Descripción de la Orden: Sin azúcar, termino medio</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            document.getElementById("clock").textContent = hours + ":" + (minutes < 10 ? '0' : '') + minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+        }
+
+        setInterval(updateTime, 1000);
+    </script>
+}

@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Vista de Cuentas";
+}
+
+<div class="container">
+    <h2>Historico de Caja</h2>
+
+    <div class="row">
+        <!-- Columna de Cuentas Activas -->
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h3>Cuentas Activas</h3>
+            @for (int i = 0; i < 4; i++)
+            { 
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Cuenta ID: 123</h5>
+                        <p class="card-text">Hora de Inicio: 12:30 PM</p>
+                        <p class="card-text">Comensal Encargado: Nombre del Cliente</p>
+                        <a href="@Url.Action("Finalizar", "Caja")" class="btn btn-danger">Finalizar Cuenta</a>
+                        <a href="@Url.Action("Detalle", "Caja")" class="btn btn-success">Ver Detalle</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Columna de Historial de Cuentas Finalizadas -->
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h3>Historial de Cuentas Finalizadas</h3>
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Cuenta ID: 456</h5>
+                        <p class="card-text">Hora de Inicio: 1:45 PM</p>
+                        <p class="card-text">Hora de Finalización: 3:15 PM</p>
+                        <p class="card-text">Comensal Encargado: Nombre del Cliente</p>
+                        <a href="@Url.Action("Ticket", "Caja")" class="btn btn-secondary">Imprimir Ticket</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

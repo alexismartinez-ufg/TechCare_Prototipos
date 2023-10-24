@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Finalizar Cuenta";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Detalles de la Cuenta</h3>
+
+            <!-- Información de la Cuenta -->
+            <p>ID de Cuenta: 123</p>
+            <p>Comensal Encargado: Nombre del Cliente</p>
+            <p>Cantidad de Personas: 4</p>
+
+            <!-- Detalles de las Órdenes -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Producto</th>
+                        <th>Costo</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2</td>
+                        <td>Producto 1</td>
+                        <td>$10</td>
+                        <td>$15</td>
+                        <td>$30</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Producto 2</td>
+                        <td>$8</td>
+                        <td>$12</td>
+                        <td>$12</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Otra Información -->
+            <p>Atendido por: Nombre del Mesero</p>
+            <p>Hora de Llegada: 12:30 PM</p>
+            <p>Reserva: Sí</p>
+            <p>Subtotal (sin propina): $42</p>
+            <p>Total (con 10% de propina): $46.20</p>
+
+            <!-- Métodos de Pago -->
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-outline-primary active">
+                    <input type="radio" name="options" id="efectivo" autocomplete="off" checked> Efectivo
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="options" id="tarjeta" autocomplete="off"> Tarjeta
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="options" id="bitcoin" autocomplete="off"> Bitcoin
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="options" id="paypal" autocomplete="off"> PayPal
+                </label>
+            </div>
+
+            <!-- Botones de Volver y Finalizar Cuenta -->
+            <div class="text-center mt-3">
+                <a href="@Url.Action("Index", "Caja")" class="btn btn-secondary">Volver</a>
+                <a href="@Url.Action("Ticket", "Caja")" class="btn btn-danger">Imprimir ticket</a>
+            </div>
+        </div>
+    </div>
+</div>

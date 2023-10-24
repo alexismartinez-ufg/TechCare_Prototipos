@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Crud de Mesas";
+}
+
+<div class="container my-4">
+    <h1 class="text-center">Crud de Mesas</h1>
+
+    <button id="agregarMesaButton" class="btn btn-success mb-3">Agregar Nueva Mesa</button>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Mesa</th>
+                <th>Cantidad de Personas</th>
+                <th>Zona</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 1; i <= 7; i++)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>Mesa #@i</td>
+                    <td>@(i * 4)</td>
+                    <td>Zona @i</td>
+                    <td>
+                        <a href="@Url.Action("EditarMesa", "Admin", new { id = i })" class="btn btn-primary">Editar</a>
+                        <a href="@Url.Action("EliminarMesa", "Admin", new { id = i })" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="agregarMesaModal" tabindex="-1" role="dialog" aria-labelledby="agregarMesaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarMesaModalLabel">Agregar Nueva Mesa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="nuevaMesaForm">
+                    <div class="form-group">
+                        <label for="numeroMesa">Número de Mesa</label>
+                        <input type="text" class="form-control" id="numeroMesa" name="numeroMesa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidadPersonas">Cantidad de Personas</label>
+                        <input type="number" class="form-control" id="cantidadPersonas" name="cantidadPersonas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zona">Zona</label>
+                        <input type="text" class="form-control" id="zona" name="zona">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="guardarMesaButton" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        // Mostrar el modal al hacer clic en "Agregar Nueva Mesa"
+        $("#agregarMesaButton").click(function () {
+            $("#agregarMesaModal").modal("show");
+        });
+
+        // Mostrar la alerta de éxito al guardar
+        $("#guardarMesaButton").click(function () {
+            // Aquí debes agregar la lógica para guardar la nueva mesa (por ejemplo, una llamada a la API o AJAX)
+            // Una vez guardada la mesa, muestra la alerta de éxito utilizando SweetAlert
+            swal("Mesa Agregada", "La nueva mesa se ha agregado con éxito.", "success");
+
+            // Cierra el modal
+            $("#agregarMesaModal").modal("hide");
+        });
+    </script>
+}
+

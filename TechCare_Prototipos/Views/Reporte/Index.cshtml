@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Reporte de Ventas";
+}
+
+<div class="container my-4">
+    <h1 class="text-center">Reporte de Ventas</h1>
+
+    <table id="ventasTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Cantidad de Productos</th>
+                <th>Costo de la Venta</th>
+                <th>Precio sin Propina</th>
+                <th>Precio Final</th>
+                <th>Fecha de Venta</th>
+                <th>Ganancia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 1; i <= 12; i++)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>$@(i * 10)</td>
+                    <td>$@(i * 12)</td>
+                    <td>$@(i * 15)</td>
+                    <td>@DateTime.Now.AddDays(-i).ToShortDateString()</td>
+                    <td>$@((i * 15) - (i * 10))</td>
+                    <td>
+                        <a class="btn btn-success" href="@Url.ActionLink("Venta", "Reporte")">Ver Detalle</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="my-3">
+        <button class="btn btn-success" id="exportExcel" onclick="CreatXlsxVentas()">Exportar a Excel</button>
+        <button class="btn btn-danger" id="exportPDF" onclick="CreatePdfVentas()">Exportar a PDF</button>
+    </div>
+</div>
+
+@section scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#ventasTable').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                }
+            });
+        });
+
+        function CreatePdfVentas() {
+            const doc = new jsPDF('landscape');
+            const table = document.getElementById('ventasTable');
+
+            const options = {
+                startY: 10,
+            };
+
+            doc.setLineWidth(0.5);
+            doc.autoTable({
+                html: table,
+                theme: 'grid',
+                margin: { top: 20 },
+                tableWidth: 'auto',
+                bodyStyles: { valign: 'top' },
+            });
+
+            window.open(URL.createObjectURL(doc.output("blob")))
+        }
+
+        function CreatXlsxVentas() {
+            var data = document.getElementById('ventasTable');
+            var excelFile = XLSX.utils.table_to_book(data, { sheet: "Reporte" });
+            XLSX.write(excelFile, { bookType: 'xlsx', bookSST: true, type: 'base64' });
+            XLSX.writeFile(excelFile, 'Reporte_Ventas.xlsx');
+        }
+    </script>
+}

@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Ver Detalle de Cuenta Activa";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Detalles de la Cuenta Activa</h3>
+
+            <!-- Información de la Cuenta Activa -->
+            <p>ID de Cuenta: 123</p>
+            <p>Comensal Encargado: Nombre del Cliente</p>
+            <p>Cantidad de Personas: 4</p>
+
+            <!-- Detalles de las Órdenes -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Nombre del Producto</th>
+                        <th>Costo</th>
+                        <th>Precio</th>
+                        <th>Comentario del Comensal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2</td>
+                        <td>Producto 1</td>
+                        <td>$10</td>
+                        <td>$15</td>
+                        <td>Sin azúcar</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Producto 2</td>
+                        <td>$8</td>
+                        <td>$12</td>
+                        <td>Término medio</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Otra Información -->
+            <p>Reserva: Sí</p>
+            <p>Hora de Llegada: 12:30 PM</p>
+            <p>Actualmente Atendido por: Nombre del Mesero</p>
+
+            <!-- Botones de Volver y Finalizar Pago -->
+            <div class="text-center mt-3">
+                <a href="@Url.Action("Index", "Caja")" class="btn btn-secondary">Volver</a>
+                <a href="@Url.Action("Finalizar", "Caja")" class="btn btn-success">Finalizar Pago</a>
+            </div>
+        </div>
+    </div>
+</div>
