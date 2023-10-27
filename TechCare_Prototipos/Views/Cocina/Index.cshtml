@@ -11,7 +11,7 @@
         @for (int i = 1; i <= 12; i++)
         {
             <div class="col-lg-3 col-md-4 col-12">
-                <div class="card mb-3">
+                <div class="card mb-5 border border-@GetColorForIndex(i) shadow bg-body-tertiary rounded">
                     <div class="card-body">
                         <h5 class="card-title"># Orden: @i</h5>
                         <p>Mesa: Mesa @i</p>
@@ -27,6 +27,7 @@
 </div>
 
 @section scripts{
+    <script src="https://unpkg.com/sweetalert2@10"></script>
     <script>
         function updateTime() {
             var now = new Date();
@@ -36,6 +37,41 @@
             document.getElementById("clock").textContent = hours + ":" + (minutes < 10 ? '0' : '') + minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
         }
 
-        setInterval(updateTime, 1000);
+        function GetRandomColor() {
+            var colors = ["primary", "secondary", "success", "danger", "warning", "info", "light"];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function hideCardAndShowAlert() {
+            Swal.fire({
+                title: "Orden despachada",
+                text: "La orden fue despachada exitosamente",
+                icon: "success",
+                timer: 1500, // Duración de 1.5 segundos
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+
+            // Oculta la tarjeta al hacer clic
+            $(this).remove();
+        }
+
+        $(document).ready(function () {
+            setInterval(updateTime, 1000);
+
+            // Agrega un controlador de clic a las tarjetas
+            $(".col-lg-3.col-md-4.col-12").click(hideCardAndShowAlert);
+
+        });
     </script>
+}
+
+@functions {
+    private string GetColorForIndex(int index)
+    {
+        var colors = new string[] { "primary", "secondary", "success", "danger", "warning", "info", "light" };
+        // Asegúrate de que el índice esté dentro del rango de colores disponibles
+        int colorIndex = (index - 1) % colors.Length;
+        return colors[colorIndex];
+    }
 }

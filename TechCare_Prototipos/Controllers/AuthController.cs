@@ -6,9 +6,8 @@ namespace TechCare_Prototipos.Controllers
     {
         public IActionResult Index() => RedirectToAction("Login");
 
-        public IActionResult Login()
-        {
-            return View();
-        }
+        public IActionResult Login() => View();
+
+        public IActionResult Logout() => View();
     }
 }

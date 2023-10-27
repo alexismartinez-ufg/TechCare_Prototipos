@@ -50,20 +50,21 @@
             <p>Total (con 10% de propina): $46.20</p>
 
             <!-- Métodos de Pago -->
-            <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-outline-primary active">
-                    <input type="radio" name="options" id="efectivo" autocomplete="off" checked> Efectivo
+            <div class="btn-group w-100" data-toggle="buttons">
+                <label class="btn btn-outline-success active" id="btn-efectivo" data-color="verde">
+                    <input type="radio" name="options" id="efectivo" value="efectivo" autocomplete="off" checked> Efectivo
                 </label>
-                <label class="btn btn-outline-primary">
-                    <input type="radio" name="options" id="tarjeta" autocomplete="off"> Tarjeta
+                <label class="btn btn-outline-danger" id="btn-tarjeta" data-color="rojo">
+                    <input type="radio" name="options" id="tarjeta" value="tarjeta" autocomplete="off"> Tarjeta
                 </label>
-                <label class="btn btn-outline-primary">
-                    <input type="radio" name="options" id="bitcoin" autocomplete="off"> Bitcoin
+                <label class="btn btn-outline-warning" id="btn-bitcoin" data-color="amarillo">
+                    <input type="radio" name="options" id="bitcoin" value="bitcoin" autocomplete="off"> Bitcoin
                 </label>
-                <label class="btn btn-outline-primary">
-                    <input type="radio" name="options" id="paypal" autocomplete="off"> PayPal
+                <label class="btn btn-outline-primary" id="btn-paypal" data-color="azul">
+                    <input type="radio" name="options" id="paypal" value="paypal" autocomplete="off"> PayPal
                 </label>
             </div>
+
 
             <!-- Botones de Volver y Finalizar Cuenta -->
             <div class="text-center mt-3">
@@ -73,3 +74,25 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // Manejar el clic en los botones de pago
+            $(".btn-group label").click(function () {
+                // Quitar la clase "active" de todos los botones
+                $(".btn-group label").removeClass("active");
+
+                // Agregar la clase "active" al botón seleccionado
+                $(this).addClass("active");
+            });
+        });
+    </script>
+
+}
+
+<style>
+    input[type="radio"] {
+        display: none;
+    }
+</style>

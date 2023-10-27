@@ -26,8 +26,8 @@
                     <td>@(i * 4)</td>
                     <td>Zona @i</td>
                     <td>
-                        <a href="@Url.Action("EditarMesa", "Admin", new { id = i })" class="btn btn-primary">Editar</a>
-                        <a href="@Url.Action("EliminarMesa", "Admin", new { id = i })" class="btn btn-danger">Eliminar</a>
+                        <button id="EditarMesa" class="btn btn-primary">Editar</button>
+                        <button id="EliminarMesa" class="btn btn-danger">Eliminar</button>
                     </td>
                 </tr>
             }
@@ -40,7 +40,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="agregarMesaModalLabel">Agregar Nueva Mesa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" onclick="CerrarModal()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -74,7 +74,21 @@
     <script>
         // Mostrar el modal al hacer clic en "Agregar Nueva Mesa"
         $("#agregarMesaButton").click(function () {
-            $("#agregarMesaModal").modal("show");
+            $("#numeroMesa").val("");
+            $("#cantidadPersonas").val("");
+            $("#zona").val("");
+            MostrarModal();
+        });
+
+        $("#EliminarMesa").click(function () {
+            swal("Mesa Eliminada", "La mesa ha sido eliminada exitosamente.", "success");
+        });
+
+        $("#EditarMesa").click(function () {
+            $("#numeroMesa").val("3");
+            $("#cantidadPersonas").val("3");
+            $("#zona").val("Zona 3");
+            MostrarModal();
         });
 
         // Mostrar la alerta de éxito al guardar
@@ -84,8 +98,17 @@
             swal("Mesa Agregada", "La nueva mesa se ha agregado con éxito.", "success");
 
             // Cierra el modal
-            $("#agregarMesaModal").modal("hide");
+            CerrarModal();
         });
+
+        function CerrarModal() {
+            $("#agregarMesaModal").modal("hide");
+        }
+
+        function MostrarModal() {
+            $("#agregarMesaModal").modal("show");
+        }
+                
     </script>
 }
 

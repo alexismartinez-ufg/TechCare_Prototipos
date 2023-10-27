@@ -9,8 +9,13 @@ namespace TechCare_Prototipos.Controllers
             return View();
         }
 
-        public IActionResult Detalle()
+        public IActionResult Detalle(bool? Success)
         {
+            if (Success.HasValue && Success.Value)
+            {
+                ViewBag.Success = true;
+            }
+
             return View();
         }
 

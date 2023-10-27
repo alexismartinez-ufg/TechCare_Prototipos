@@ -29,9 +29,9 @@
                 <td>5.0</td>
                 <td>Bebida refrescante</td>
                 <td>
-                    <a href="#" class="btn btn-primary">Ver Imagen</a>
-                    <a href="#" class="btn btn-warning">Editar</a>
-                    <a href="#" class="btn btn-danger">Eliminar</a>
+                    <button class="btn btn-primary VerImagen">Ver Imagen</button>
+                    <button class="btn btn-warning EditarProducto">Editar</button>
+                    <button id="EliminarProducto" class="btn btn-danger">Eliminar</button>
                 </td>
             </tr>
             <tr>
@@ -42,9 +42,9 @@
                 <td>7.0</td>
                 <td>Postre delicioso</td>
                 <td>
-                    <a href="#" class="btn btn-primary">Ver Imagen</a>
-                    <a href="#" class="btn btn-warning">Editar</a>
-                    <a href="#" class="btn btn-danger">Eliminar</a>
+                    <button class="btn btn-primary VerImagen">Ver Imagen</button>
+                    <button class="btn btn-warning EditarProducto">Editar</button>
+                    <button id="EliminarProducto" class="btn btn-danger">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -56,7 +56,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Nuevo Producto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" onclick="VerifyCloseModal()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -90,7 +90,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="cancelarProductoButton" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button id="guardarProductoButton" class="btn btn-primary">Guardar</button>
             </div>
         </div>
@@ -115,5 +115,69 @@
             // Cierra el modal
             $("#agregarProductoModal").modal("hide");
         });
+
+        $(".VerImagen").click(function () {
+
+            var imageUrl = "https://c.files.bbci.co.uk/DBBF/production/_105055265_bandejapaisa.jpg";
+
+            var imgElement = document.createElement("img");
+            imgElement.src = imageUrl;
+            imgElement.style.width = "100%";
+
+            swal({
+                content: imgElement
+            });
+        });
+
+        $("#EliminarProducto").click(function () {
+            swal("Producto Eliminada", "El producto ha sido eliminado exitosamente.", "success");
+        });
+
+        $(".EditarProducto").click(function () {
+            $("#nombre").val("Producto 1");
+            $("#tipoProducto").val("Almuerzo");
+            $("#coste").val("10.50");
+            $("#precioUnitario").val("15.75");
+            $("#descripcion").val("Almuerzo");
+            $("#agregarProductoModal").modal("show");
+        });
+
+        $("#cancelarProductoButton").click(function () {
+            VerifyCloseModal();
+        });
+
+        function VerifyCloseModal() {
+            // Verificar si al menos uno de los campos está lleno
+            var nombre = $("#nombre").val();
+            var tipoProducto = $("#tipoProducto").val();
+            var coste = $("#coste").val();
+            var precioUnitario = $("#precioUnitario").val();
+            var descripcion = $("#descripcion").val();
+
+            if (nombre != "" || coste != "" || precioUnitario != "" || descripcion != "") {
+                // Mostrar modal de confirmación con SweetAlert
+                swal({
+                    title: "Cancelar Producto",
+                    text: "¿Desea cancelar y perder la información?",
+                    icon: "warning",
+                    buttons: ["No", "Sí"],
+                    dangerMode: true,
+                })
+                    .then((willCancel) => {
+                        if (willCancel) {
+                            // Usuario eligió cancelar, cierra el modal
+                            $("#agregarProductoModal").modal("hide");
+                            $("#nombre").val("");
+                            $("#tipoProducto").val("");
+                            $("#coste").val("");
+                            $("#precioUnitario").val("");
+                            $("#descripcion").val("");
+                        }
+                    });
+            } else {
+                // Si ningún campo está lleno, simplemente cierra el modal
+                $("#agregarProductoModal").modal("hide");
+            }
+        }
     </script>
 }

@@ -1,4 +1,8 @@
-﻿<div class="container">
+﻿@{
+    var success = ViewBag.Success as bool? ?? false;
+}
+
+<div class="container">
     <div class="row">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -42,6 +46,14 @@
         </div>
     </div>
 </div>
+
+@if (success)
+{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        swal("Orden Agregada", "La nueva Orden se ha agregado con éxito.", "success");
+    </script>
+}
 
 <script>
     document.getElementById("nuevaOrdenButton").addEventListener("click", function () {
