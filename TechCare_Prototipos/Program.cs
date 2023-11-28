@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Prototipos;
+using Prototipos.BAL.Interfaces;
+using Prototipos.BAL.Services;
 
 namespace TechCare_Prototipos
 {
@@ -13,9 +15,11 @@ namespace TechCare_Prototipos
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            string connectionString = builder.Configuration.GetConnectionString("EmprendimientosConnection");
+            string connectionString = builder.Configuration.GetConnectionString("PropotitiosConnection");
 
             builder.Services.AddDbContext<PrototiposContext>(options => options.UseSqlServer(connectionString));
+
+            builder.Services.AddScoped<IMailNotification, MailNotification>();
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(o =>
