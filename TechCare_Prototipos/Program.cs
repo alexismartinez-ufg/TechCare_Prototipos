@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using Prototipos;
+
 namespace TechCare_Prototipos
 {
     public class Program
@@ -8,6 +12,18 @@ namespace TechCare_Prototipos
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            string connectionString = builder.Configuration.GetConnectionString("EmprendimientosConnection");
+
+            builder.Services.AddDbContext<PrototiposContext>(options => options.UseSqlServer(connectionString));
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+               .AddCookie(o =>
+               {
+                   o.LoginPath = "/Home/Servicios";
+                   o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                   o.AccessDeniedPath = "/Home/Index";
+               });
 
             var app = builder.Build();
 
@@ -25,6 +41,8 @@ namespace TechCare_Prototipos
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.MapControllerRoute(
                 name: "default",
