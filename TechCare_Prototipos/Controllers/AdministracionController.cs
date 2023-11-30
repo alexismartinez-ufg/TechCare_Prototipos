@@ -2,7 +2,7 @@
 
 namespace TechCare_Prototipos.Controllers
 {
-    public class Administracion : Controller
+    public class AdministracionController : Controller
     {
         public IActionResult Index()
         {

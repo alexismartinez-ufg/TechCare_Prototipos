@@ -6,9 +6,9 @@ using System.Net.Mime;
 
 namespace Prototipos.BAL.Services
 {
-    public class MailNotification : IMailNotification
+    public class MailNotificationService : IMailNotificationService
     {
-        public MailNotification() 
+        public MailNotificationService() 
         {
 
         }

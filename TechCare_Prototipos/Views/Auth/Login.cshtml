@@ -7,14 +7,14 @@
 <div class="container">
     <div class="d-flex align-items-center flex-column">
         <div class="container col-lg-4 col-md-4">
-            <form>
+            <form asp-action="Login" asp-controller="Auth" method="post">
                 <div class="text-center">
                     <h3>Login</h3>
                 </div>
 
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" asp-for="UserName">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" asp-for="UserName">
                 </div>
 
                 <div class="mb-3">

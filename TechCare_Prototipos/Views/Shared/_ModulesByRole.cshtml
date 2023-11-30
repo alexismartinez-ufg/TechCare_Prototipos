@@ -1,0 +1,55 @@
+﻿@if (User == null || User.Identity == null || !User.Identity.IsAuthenticated)
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
+    </li>
+}
+
+@if (User != null && (User.IsInRole(RolesReferences.Mesero) || User.IsInRole(RolesReferences.Gerente) || User.IsInRole(RolesReferences.ResourceOwner)))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Comedor" asp-action="Index">Comedor</a>
+    </li>
+}
+@if (User != null && (User.IsInRole(RolesReferences.Cajero) || User.IsInRole(RolesReferences.Gerente) || User.IsInRole(RolesReferences.ResourceOwner)))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Caja" asp-action="Index">Caja</a>
+    </li>
+}
+@if (User != null && (User.IsInRole(RolesReferences.Cocinero) || User.IsInRole(RolesReferences.Gerente) || User.IsInRole(RolesReferences.ResourceOwner)))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Cocina" asp-action="Index">Cocina</a>
+    </li>
+}
+@if (User != null && (User.IsInRole(RolesReferences.Gerente) || User.IsInRole(RolesReferences.ResourceOwner)))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Reporte" asp-action="Index">Reporte</a>
+    </li>
+}
+@if (User != null && (User.IsInRole(RolesReferences.Administrador) || User.IsInRole(RolesReferences.ResourceOwner)))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link text-dark dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Administración
+        </a>
+        <div class="dropdown-menu" aria-labelledby="adminDropdown">
+            <a class="dropdown-item" asp-controller="Administracion" asp-action="Index">Mesas</a>
+            <a class="dropdown-item" asp-controller="Administracion" asp-action="Productos">Productos</a>
+        </div>
+    </li>
+}
+
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Reserva" asp-action="Index">Reservas</a>
+</li>
+
+
+@if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+    </li>
+}  

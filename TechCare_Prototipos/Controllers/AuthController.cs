@@ -1,28 +1,40 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Prototipos.BAL.Interfaces;
+using Prototipos.DAL.ViewModels;
 using System.Security.Claims;
-using TechCare_Prototipos.ViewModels;
 
 namespace TechCare_Prototipos.Controllers
 {
     public class AuthController : Controller
     {
-        public IActionResult Index() => RedirectToAction("Login");
+        private readonly IAuthService authService;
+        private readonly IUsuariosRepository usuariosRepository;
 
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public AuthController(IAuthService _authService, IUsuariosRepository _usuariosRepository)
         {
-            if (model.UserName == "alexis@alexis.alexis" && model.Password == "Admin123!")
+            authService = _authService;
+            usuariosRepository = _usuariosRepository;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            await Seed.SeedUsers(usuariosRepository);
+            return RedirectToAction("Login");
+        }
+
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {            
+            if(authService.TryLogin(model, out ClaimsPrincipal claimsPrincipal))
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, model.UserName),
-                    new Claim(ClaimTypes.Role, "administrador")
-                };
-
-                var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
                 return RedirectToAction("Servicios");
             }

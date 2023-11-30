@@ -2,7 +2,7 @@
 
 namespace Prototipos.BAL.Interfaces
 {
-    public interface IMailNotification
+    public interface IMailNotificationService
     {
         Task<bool> NotifyNewReparacion(BalMailMessage model);
     }

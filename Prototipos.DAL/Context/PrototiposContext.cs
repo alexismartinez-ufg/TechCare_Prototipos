@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Prototipos.DAL.Models;
 
 namespace Prototipos;
 
@@ -12,6 +13,8 @@ public partial class PrototiposContext : DbContext
         : base(options)
     {
     }
+
+    public DbSet<Usuario> Usuarios {  get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 

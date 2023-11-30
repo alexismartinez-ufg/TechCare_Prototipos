@@ -1,4 +1,4 @@
-﻿namespace TechCare_Prototipos.ViewModels
+﻿namespace Prototipos.DAL.ViewModels
 {
     public class LoginViewModel
     {
