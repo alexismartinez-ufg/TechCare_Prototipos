@@ -8,15 +8,5 @@ namespace TechCare_Prototipos.Controllers
         {
             return View();
         }
-
-        public IActionResult Exitosa()
-        {
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
     }
 }
