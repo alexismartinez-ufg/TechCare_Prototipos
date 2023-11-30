@@ -1,8 +1,7 @@
-﻿using Prototipos.BAL.Interfaces;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Prototipos.BAL.Interfaces;
 using Prototipos.DAL.ViewModels;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Runtime.CompilerServices;
 
 namespace Prototipos.BAL.Services
 {
@@ -11,7 +10,7 @@ namespace Prototipos.BAL.Services
         private readonly IUsuariosRepository usuariosRepository;
         public AuthService(IUsuariosRepository _usuariosRepository)
         {
-            _usuariosRepository = _usuariosRepository;
+            usuariosRepository = _usuariosRepository;
         }
 
         public bool TryLogin(LoginViewModel login, out ClaimsPrincipal claimsPrincipal)

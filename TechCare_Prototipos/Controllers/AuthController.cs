@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Prototipos.BAL.Helpers;
 using Prototipos.BAL.Interfaces;
 using Prototipos.DAL.ViewModels;
 using System.Security.Claims;
@@ -36,13 +37,19 @@ namespace TechCare_Prototipos.Controllers
             {
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
-                return RedirectToAction("Servicios");
+                var role = claimsPrincipal.FindFirst(ClaimTypes.Role)?.Value ?? "default";
+
+                return RedirectToAction(ViewsByRole.Dictionary[role].Action, ViewsByRole.Dictionary[role].Controller);
             }
 
             return View();
         }
 
-        public IActionResult Logout() => View();
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return View();
+        }
         public IActionResult Denied() => View();
     }
 }

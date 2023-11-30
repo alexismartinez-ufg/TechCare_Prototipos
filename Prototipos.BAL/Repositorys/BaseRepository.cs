@@ -6,17 +6,17 @@ namespace Prototipos.BAL.Repositorios
 {
     public abstract class BaseRepository<T> : IRepository<T> where T : BaseModel
     {
-        protected readonly PrototiposContext _dbContext;
+        protected readonly PrototiposContext dbContext;
 
-        protected BaseRepository(PrototiposContext dbContext)
+        protected BaseRepository(PrototiposContext _dbContext)
         {
-            _dbContext = dbContext;
+            dbContext = _dbContext;
         }
 
         public virtual async Task<T> AddAsync<T>(T entity) where T : BaseModel
         {
-            await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await dbContext.Set<T>().AddAsync(entity);
+            await dbContext.SaveChangesAsync();
 
             return entity;
         }
@@ -24,25 +24,25 @@ namespace Prototipos.BAL.Repositorios
 
         public async Task<int> DeleteAsync<T>(T entity) where T : BaseModel
         {
-            _dbContext.Set<T>().Remove(entity);
-            return await _dbContext.SaveChangesAsync();
+            dbContext.Set<T>().Remove(entity);
+            return await dbContext.SaveChangesAsync();
         }
 
         public virtual async Task<T> GetByIdAsync(int id)
         {
-            return await _dbContext.Set<T>().SingleOrDefaultAsync(e => e.Id == id);
+            return await dbContext.Set<T>().SingleOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<List<T>> ListAsync()
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await dbContext.Set<T>().ToListAsync();
         }
 
 
         public async Task<int> UpdateAsync<T>(T entity) where T : BaseModel
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            return await _dbContext.SaveChangesAsync();
+            dbContext.Entry(entity).State = EntityState.Modified;
+            return await dbContext.SaveChangesAsync();
         }
     }
 }

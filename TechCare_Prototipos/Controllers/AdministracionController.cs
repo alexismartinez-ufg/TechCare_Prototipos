@@ -4,9 +4,10 @@ using Prototipos.BAL.Helpers;
 
 namespace TechCare_Prototipos.Controllers
 {
-    [Authorize(Roles = $"{RolesReferences.Administrador},{RolesReferences.ResourceOwner}")]
+    [Authorize(Roles = $"{RolesReferences.ResourceOwner},{RolesReferences.Administrador}")]
     public class AdministracionController : Controller
     {
+        
         public IActionResult Index()
         {
             return View();
