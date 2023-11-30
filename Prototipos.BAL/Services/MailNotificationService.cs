@@ -1,5 +1,6 @@
 ﻿using Prototipos.BAL.Interfaces;
 using Prototipos.DAL.Models;
+using Prototipos.DAL.ViewModels;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
@@ -13,9 +14,16 @@ namespace Prototipos.BAL.Services
 
         }
 
-        public async Task<bool> NotifyNewReparacion(BalMailMessage model)
+        public async Task<bool> NotifyReserva(ReservaViewModel model)
         {
-            return SendMail(model);
+            var senderModel = new BalMailMessage()
+            {
+                SendTo = model.Correo,
+                Title = "Reserva exitosa.",
+                HTMLContent = model.NotificationContent
+            };
+
+            return SendMail(senderModel);
         }
 
         public bool SendMail(BalMailMessage senderModel)
@@ -33,15 +41,6 @@ namespace Prototipos.BAL.Services
             mailMessage.Body = senderModel.HTMLContent;
             mailMessage.IsBodyHtml = true;
 
-            // Adjuntar la imagen
-            string pathToImage = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Img\\imagen.png");
-            var existe = File.Exists(pathToImage);
-            Attachment inlineImage = new Attachment(pathToImage);
-            inlineImage.ContentDisposition.Inline = true;
-            inlineImage.ContentDisposition.DispositionType = DispositionTypeNames.Inline;
-            inlineImage.ContentId = "imagen.png";
-            mailMessage.Attachments.Add(inlineImage);
-
             try
             {
                 // Envío del correo
@@ -52,11 +51,6 @@ namespace Prototipos.BAL.Services
                 Console.WriteLine("Error al enviar el correo: " + ex.Message);
 
                 return false;
-            }
-            finally
-            {
-                // Limpiar recursos
-                inlineImage.Dispose();
             }
 
             return true;

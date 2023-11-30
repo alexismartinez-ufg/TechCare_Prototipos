@@ -3,8 +3,8 @@ using Prototipos.DAL.ViewModels;
 
 namespace Prototipos.BAL.Interfaces
 {
-    public interface IMailNotificationService
+    public interface IReservasRepository : IRepository<Reserva>
     {
-        Task<bool> NotifyReserva(ReservaViewModel model);
+        Task<bool> DoReserva(ReservaViewModel model);
     }
 }

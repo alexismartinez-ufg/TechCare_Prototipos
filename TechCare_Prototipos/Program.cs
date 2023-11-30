@@ -25,6 +25,9 @@ namespace TechCare_Prototipos
             builder.Services.AddScoped<IMailNotificationService, MailNotificationService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUsuariosRepository, UsuariosRepository>();
+            builder.Services.AddScoped<IMesasRepository, MesasRepository>();
+            builder.Services.AddScoped<IZonasRepository, ZonasRepository>();
+            builder.Services.AddScoped<IReservasRepository, ReservasRepository>();
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(o =>

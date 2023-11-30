@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Prototipos.DAL.Models
+﻿namespace Prototipos.DAL.Models
 {
     public class BalMailMessage
     {

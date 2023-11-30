@@ -1,37 +1,42 @@
-﻿<div class="container">
+﻿@model ReservaViewModel
+
+<div class="container">
     <div class="d-flex align-items-center flex-column">
         <div class="container col-lg-4 col-md-6">
-            <form>
+            <form asp-action="Reservar" asp-controller="Reserva" method="post">
                 <div class="text-center">
                     <h3>Reserva de Mesa</h3>
                 </div>
                 <div class="mb-3">
                     <label for="nombreApellido" class="form-label">Nombre y Apellido</label>
-                    <input type="text" class="form-control" id="nombreApellido" name="nombreApellido" required>
+                    <input type="text" class="form-control" asp-for="PersonaACargo" required>
                 </div>
                 <div class="mb-3">
                     <label for="contacto" class="form-label">Contacto</label>
-                    <input type="tel" class="form-control" id="contacto" name="contacto" required>
+                    <input type="tel" class="form-control" asp-for="Contacto" required>
                 </div>
                 <div class="mb-3">
                     <label for="correo" class="form-label">Correo</label>
-                    <input type="email" class="form-control" id="correo" name="correo" required>
+                    <input type="email" class="form-control" asp-for="Correo" required>
                 </div>
                 <div class="mb-3">
                     <label for="fechaReserva" class="form-label">Fecha de Reserva</label>
-                    <input type="datetime-local" class="form-control" id="fechaReserva" name="fechaReserva" required>
+                    <input type="datetime-local" class="form-control" asp-for="FechaReserva" min="@Model.FechaReserva.AddHours(2).ToString("yyyy-MM-ddTHH:mm")" required>
                 </div>
                 <div class="mb-3">
                     <label for="mesa" class="form-label">Cantidad de personas</label>
-                    <select class="form-select" id="mesa" name="mesa" required>
-                        <option value="0" hidden>Seleccione cantidad de persona</option>
-                        <option value="Mesa 1">1</option>
-                        <option value="Mesa 2">2</option>
-                        <option value="Mesa 3">3</option>
+                    <select class="form-select" asp-for="IdMesa" required>
+                        <option value="" selected hidden>Seleccione cantidad de persona</option>
+
+                        @foreach (var mesa in Model.MesasDisponibles)
+                        {
+                            <option value="@mesa.Id">@mesa.NombreMesa</option>
+                        }
+
                     </select>
                 </div>
                 <div class="text-center">
-                    <a class="btn btn-primary" asp-controller="Reserva" asp-action="Exitosa">Enviar Reserva</a>
+                    <button type="submit" class="btn btn-primary mb-3">Reservar</button>
                 </div>
             </form>
         </div>

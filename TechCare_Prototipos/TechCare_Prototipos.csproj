@@ -18,4 +18,19 @@
     <ProjectReference Include="..\Prototipos.DAL\Prototipos.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="MailTemplates\Reserva\ReservaCreationNotification.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ReservaCreationNotification.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="MailTemplates\Reserva\ReservaCreationNotification.cshtml">
+      <Generator>RazorTemplatePreprocessor</Generator>
+      <LastGenOutput>ReservaCreationNotification.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+
 </Project>

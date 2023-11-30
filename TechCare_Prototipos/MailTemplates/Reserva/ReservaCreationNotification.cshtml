@@ -1,0 +1,26 @@
+﻿@model Prototipos.DAL.ViewModels.ReservaNotificationViewModel
+
+<body style="font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 10px 0px;padding: 0;">
+    <div style=" max-width: 600px;margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style=" color: #333333;">¡Reserva Exitosa!</h1>
+        <p style="color: #555555;">Estimado/a @Model.PersonaACargo,</p>
+        <p style="color: #555555;">Su reserva ha sido realizada con éxito. Aquí están los detalles:</p>
+
+        <div style=" margin-top: 20px;">
+            <div style="font-weight: bold;margin-bottom: 5px;margin-top: 15px;">Mesa:</div>
+            <div style="color: #007bff;">
+                @Model.MesaSeleccionada.NombreMesa (Para @Model.MesaSeleccionada.Personas
+                personas) en la zona @Model.MesaSeleccionada.Zona.NombreZona
+            </div>
+
+            <div style="font-weight: bold;margin-bottom: 5px;margin-top: 15px;">Persona a Cargo:</div>
+            <div style="color: #007bff;">@Model.PersonaACargo</div>
+
+            <div style="font-weight: bold;margin-bottom: 5px;margin-top: 15px;">Fecha Reservada:</div>
+            <div style="color: #007bff;">@Model.FechaReservada.ToString("dd/MM/yyyy HH:mm")</div>
+
+            <p style="color: #28a745;font-weight: bold;margin-top: 10px;">¡Gracias por elegir el servicio TechCare!</p>
+            <p style="color: #32643e;font-weight: bold;margin-top: 10px;">Procurar asistir minimo 15 minutos antes de la reserva o la mesa sera reasignada.</p>
+        </div>
+    </div>
+</body>
