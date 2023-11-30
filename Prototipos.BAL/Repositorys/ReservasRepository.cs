@@ -21,13 +21,13 @@ namespace Prototipos.BAL.Repositorys
 
             var mesa = dbContext.Mesas.Include(x=>x.Zona).FirstOrDefault(m => m.Id == model.IdMesa);
             
-            if (mesa != null && !dbContext.Reservas.Any(r=>r.IdMesa == mesa.Id && (r.EstadoReserva != ReservasReference.Reservada || r.FechaReserva.Value.AddHours(4) <= DateTime.Now)))
+            if (mesa != null && !dbContext.Reservas.Any(r=>r.IdMesa == mesa.Id && (r.EstadoReserva != ReservasStateReference.Reservada || r.FechaReserva.Value.AddHours(4) <= DateTime.Now)))
             {
                 await AddAsync(new Reserva()
                 {
                     Contacto = model.Contacto,
                     Correo = model.Correo,
-                    EstadoReserva = ReservasReference.Reservada,
+                    EstadoReserva = ReservasStateReference.Reservada,
                     FechaReserva = model.FechaReserva,
                     IdMesa = mesa.Id,
                     PersonaACargo = model.PersonaACargo

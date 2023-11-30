@@ -9,6 +9,7 @@ namespace TechCare_Prototipos.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
 

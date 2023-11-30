@@ -17,7 +17,7 @@ namespace Prototipos.BAL.Repositorys
         public async Task<List<Mesa>> GetMesasDisponibles()
         {
             return dbContext.Mesas
-                .Where(m => !dbContext.Reservas.Any(r => r.IdMesa == m.Id && r.EstadoReserva == ReservasReference.Reservada))
+                .Where(m => !dbContext.Reservas.Any(r => r.IdMesa == m.Id && r.EstadoReserva == ReservasStateReference.Reservada))
                 .ToList();
         }
     }

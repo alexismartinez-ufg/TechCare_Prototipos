@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prototipos;
 
@@ -11,9 +12,11 @@ using Prototipos;
 namespace Prototipos.DAL.Migrations
 {
     [DbContext(typeof(PrototiposContext))]
-    partial class PrototiposContextModelSnapshot : ModelSnapshot
+    [Migration("20231130093136_Cuenta Table")]
+    partial class CuentaTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,46 +24,6 @@ namespace Prototipos.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Prototipos.DAL.Models.Cuenta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CantidadPersonas")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ComensalACargo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EstadoCuenta")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("FechaAsignacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("IdCuentaPadre")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdMesa")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdMesero")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdCuentaPadre");
-
-                    b.HasIndex("IdMesa");
-
-                    b.HasIndex("IdMesero");
-
-                    b.ToTable("Cuentas");
-                });
 
             modelBuilder.Entity("Prototipos.DAL.Models.Mesa", b =>
                 {
@@ -169,27 +132,6 @@ namespace Prototipos.DAL.Migrations
                     b.ToTable("Zonas");
                 });
 
-            modelBuilder.Entity("Prototipos.DAL.Models.Cuenta", b =>
-                {
-                    b.HasOne("Prototipos.DAL.Models.Cuenta", "CuentaPadre")
-                        .WithMany("CuentasHijas")
-                        .HasForeignKey("IdCuentaPadre");
-
-                    b.HasOne("Prototipos.DAL.Models.Mesa", "Mesa")
-                        .WithMany()
-                        .HasForeignKey("IdMesa");
-
-                    b.HasOne("Prototipos.DAL.Models.Usuario", "Mesero")
-                        .WithMany()
-                        .HasForeignKey("IdMesero");
-
-                    b.Navigation("CuentaPadre");
-
-                    b.Navigation("Mesa");
-
-                    b.Navigation("Mesero");
-                });
-
             modelBuilder.Entity("Prototipos.DAL.Models.Mesa", b =>
                 {
                     b.HasOne("Prototipos.DAL.Models.Zona", "Zona")
@@ -206,11 +148,6 @@ namespace Prototipos.DAL.Migrations
                         .HasForeignKey("IdMesa");
 
                     b.Navigation("Mesa");
-                });
-
-            modelBuilder.Entity("Prototipos.DAL.Models.Cuenta", b =>
-                {
-                    b.Navigation("CuentasHijas");
                 });
 
             modelBuilder.Entity("Prototipos.DAL.Models.Zona", b =>

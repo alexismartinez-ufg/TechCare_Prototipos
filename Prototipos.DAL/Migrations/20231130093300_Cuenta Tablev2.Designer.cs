@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prototipos;
 
@@ -11,9 +12,11 @@ using Prototipos;
 namespace Prototipos.DAL.Migrations
 {
     [DbContext(typeof(PrototiposContext))]
-    partial class PrototiposContextModelSnapshot : ModelSnapshot
+    [Migration("20231130093300_Cuenta Tablev2")]
+    partial class CuentaTablev2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

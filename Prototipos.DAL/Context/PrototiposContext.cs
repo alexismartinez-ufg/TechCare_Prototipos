@@ -18,6 +18,7 @@ public partial class PrototiposContext : DbContext
     public DbSet<Zona> Zonas {  get; set; }
     public DbSet<Mesa> Mesas {  get; set; }
     public DbSet<Reserva> Reservas {  get; set; }
+    public DbSet<Cuenta> Cuentas {  get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 

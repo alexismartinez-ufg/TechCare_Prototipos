@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Prototipos.BAL.Helpers
 {
-    public static class ReservasStateReference
+    public static class CuentasStateReferences
     {
-        public const string Reservada = "reservada";
+        public const string Asignada = "asignada";
         public const string Finalizada = "finalizada";
     }
 }
