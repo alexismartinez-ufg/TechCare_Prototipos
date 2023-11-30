@@ -12,7 +12,7 @@ namespace TechCare_Prototipos.Controllers
 
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (model.UserName == "alexis@alexis.alexis" && model.Password == "1234")
+            if (model.UserName == "alexis@alexis.alexis" && model.Password == "Admin123!")
             {
                 var claims = new List<Claim>
                 {
@@ -31,5 +31,6 @@ namespace TechCare_Prototipos.Controllers
         }
 
         public IActionResult Logout() => View();
+        public IActionResult Denied() => View();
     }
 }

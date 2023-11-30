@@ -24,9 +24,9 @@ namespace TechCare_Prototipos
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(o =>
                {
-                   o.LoginPath = "/Home/Servicios";
+                   o.LoginPath = "/Auth/Index";
                    o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                   o.AccessDeniedPath = "/Home/Index";
+                   o.AccessDeniedPath = "/Auth/Denied";
                });
 
             var app = builder.Build();
