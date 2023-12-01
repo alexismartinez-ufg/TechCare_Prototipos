@@ -28,6 +28,7 @@ namespace TechCare_Prototipos
             builder.Services.AddScoped<IMesasRepository, MesasRepository>();
             builder.Services.AddScoped<IZonasRepository, ZonasRepository>();
             builder.Services.AddScoped<IReservasRepository, ReservasRepository>();
+            builder.Services.AddScoped<ICuentasRepository, CuentasRepository>();
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(o =>

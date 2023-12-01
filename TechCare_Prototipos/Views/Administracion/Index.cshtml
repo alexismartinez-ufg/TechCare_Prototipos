@@ -1,5 +1,9 @@
-﻿@{
+﻿@model MesasViewModel
+
+@{
     ViewData["Title"] = "Crud de Mesas";
+
+    var editar = Model.EditarMesa != null;
 }
 
 <div class="container my-4">
@@ -18,16 +22,16 @@
             </tr>
         </thead>
         <tbody>
-            @for (int i = 1; i <= 7; i++)
+            @foreach(var mesa in Model.Mesas)
             {
                 <tr>
-                    <td>@i</td>
-                    <td>Mesa #@i</td>
-                    <td>@(i * 4)</td>
-                    <td>Zona @i</td>
+                    <td>@mesa.Id</td>
+                    <td>@mesa.NombreMesa</td>
+                    <td>@mesa.Personas</td>
+                    <td>@mesa?.Zona?.NombreZona</td>
                     <td>
-                        <button id="EditarMesa" class="btn btn-primary">Editar</button>
-                        <button id="EliminarMesa" class="btn btn-danger">Eliminar</button>
+                        <a href="/Administracion/Editar?idMesa=@mesa.Id" class="btn btn-warning">Editar</a>
+                        <a href="/Administracion/Eliminar?idMesa=@mesa.Id" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             }
@@ -38,36 +42,84 @@
 <div class="modal fade" id="agregarMesaModal" tabindex="-1" role="dialog" aria-labelledby="agregarMesaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="agregarMesaModalLabel">Agregar Nueva Mesa</h5>
-                <button type="button" class="close" data-dismiss="modal" onclick="CerrarModal()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="nuevaMesaForm">
-                    <div class="form-group">
-                        <label for="numeroMesa">Número de Mesa</label>
-                        <input type="text" class="form-control" id="numeroMesa" name="numeroMesa" required>
+            @if (editar)
+            {
+                <form asp-action="Editar" asp-controller="Administracion" method="post">
+                    @Html.HiddenFor(x=>x.EditarMesa.Id)
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="agregarMesaModalLabel">Agregar Nueva Mesa</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="CerrarModal()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="cantidadPersonas">Cantidad de Personas</label>
-                        <input type="number" class="form-control" id="cantidadPersonas" name="cantidadPersonas" required>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="numeroMesa">Nombre de Mesa</label>
+                            <input type="text" class="form-control" asp-for="EditarMesa.NombreMesa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidadPersonas">Cantidad de Personas</label>
+                            <input type="number" class="form-control" asp-for="EditarMesa.Personas" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zona">Zona</label>
+                            <select class="form-select" asp-for="EditarMesa.IdZona" required>
+                                <option value="" selected hidden>Seleccione una zona</option>
+                                @foreach (var zona in Model.Zonas)
+                                {
+                                    <option value="@zona.Id">@zona.NombreZona</option>
+                                }
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="zona">Zona</label>
-                        <input type="text" class="form-control" id="zona" name="zona">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button id="submit" class="btn btn-primary">Editar</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="guardarMesaButton" class="btn btn-primary">Guardar</button>
-            </div>
+            }
+            else
+            {
+                <form asp-action="AgregarMesa" asp-controller="Administracion" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="agregarMesaModalLabel">Agregar Nueva Mesa</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="CerrarModal()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="numeroMesa">Nombre de Mesa</label>
+                            <input type="text" class="form-control" asp-for="NuevaMesa.NombreMesa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidadPersonas">Cantidad de Personas</label>
+                            <input type="number" class="form-control" asp-for="NuevaMesa.Personas" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zona">Zona</label>
+                            <select class="form-select" asp-for="NuevaMesa.IdZona" required>
+                                <option value="" selected hidden>Seleccione una zona</option>
+
+                                @foreach (var zona in Model.Zonas)
+                                {
+                                    <option value="@zona.Id">@zona.NombreZona</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button id="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            }
         </div>
     </div>
 </div>
-
 
 @section scripts{
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -108,7 +160,49 @@
         function MostrarModal() {
             $("#agregarMesaModal").modal("show");
         }
-                
+
     </script>
+
+    @if (editar)
+    {
+        <text>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#agregarMesaModal").modal("show");
+                });
+            </script>
+        </text>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+    {
+        <text>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: '@Html.Raw(ViewBag.SuccessMessage)',
+                    });
+                });
+            </script>
+        </text>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <text>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: '@Html.Raw(ViewBag.ErrorMessage)',
+                    });
+                });
+            </script>
+        </text>
+    }
+
 }
 
