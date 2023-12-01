@@ -9,5 +9,7 @@ namespace Prototipos.BAL.Interfaces
 
         Task<List<ComedorViewModel>> GetComedor();
         Task<Reserva> GetReservaInfo(int IdMesa);
+
+        Task<Mesa> CreateMesaIfNotExist(Mesa mesa);
     }
 }

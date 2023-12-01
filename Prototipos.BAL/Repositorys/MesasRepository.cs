@@ -65,5 +65,16 @@ namespace Prototipos.BAL.Repositorys
             return MesaStateReferences.Libre;
         }
 
+        public async Task<Mesa> CreateMesaIfNotExist(Mesa mesa)
+        {
+            var mesaExist = await dbContext.Mesas.FirstOrDefaultAsync(m => m.NombreMesa == mesa.NombreMesa && m.Personas == mesa.Personas && m.IdZona == mesa.IdZona);
+
+            if(mesaExist == null)
+            {
+                mesaExist = await AddAsync(mesa);
+            }
+
+            return mesaExist;
+        }
     }
 }

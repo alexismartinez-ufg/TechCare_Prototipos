@@ -118,5 +118,39 @@ namespace TechCare_Prototipos
                 Role = RolesReferences.Administrador
             });
         }
+
+        public static async Task SeedZonas(IZonasRepository zonasRepository)
+        {
+            await zonasRepository.CreateZonafNotExist(new Zona { NombreZona = "Zona 1" });
+            await zonasRepository.CreateZonafNotExist(new Zona { NombreZona = "Zona 2" });
+        }
+
+        public static async Task SeedMesas(IMesasRepository mesasRepository)
+        {
+            await mesasRepository.CreateMesaIfNotExist(new Mesa
+            {
+                IdZona = 1,
+                NombreMesa = "Mesa 1 - 4p",
+                Personas = 4,
+            });
+            await mesasRepository.CreateMesaIfNotExist(new Mesa
+            {
+                IdZona = 1,
+                NombreMesa = "Mesa 2 - 6p",
+                Personas = 6,
+            });
+            await mesasRepository.CreateMesaIfNotExist(new Mesa
+            {
+                IdZona = 2,
+                NombreMesa = "Mesa 3 - 5p",
+                Personas = 5,
+            });
+            await mesasRepository.CreateMesaIfNotExist(new Mesa
+            {
+                IdZona = 2,
+                NombreMesa = "Mesa 4 - 2p",
+                Personas = 2,
+            });
+        }
     }
 }

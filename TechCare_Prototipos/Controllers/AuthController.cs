@@ -12,16 +12,22 @@ namespace TechCare_Prototipos.Controllers
     {
         private readonly IAuthService authService;
         private readonly IUsuariosRepository usuariosRepository;
+        private readonly IZonasRepository zonasRepository;
+        private readonly IMesasRepository mesasRepository;
 
-        public AuthController(IAuthService _authService, IUsuariosRepository _usuariosRepository)
+        public AuthController(IAuthService _authService, IUsuariosRepository _usuariosRepository, IZonasRepository _zonasRepository, IMesasRepository _mesasRepository)
         {
             authService = _authService;
             usuariosRepository = _usuariosRepository;
+            zonasRepository = _zonasRepository;
+            mesasRepository = _mesasRepository;
         }
 
         public async Task<IActionResult> Index()
         {
             await Seed.SeedUsers(usuariosRepository);
+            await Seed.SeedZonas(zonasRepository);
+            await Seed.SeedMesas(mesasRepository);
             return RedirectToAction("Login");
         }
 

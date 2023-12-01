@@ -15,7 +15,7 @@
 
                         @if(item.Estado == MesaStateReferences.Libre)
                         {
-                            <a href="@Url.Action("Asignar")" class="btn btn-primary">Asignar mesa</a>
+                            <a href="@Url.Action("Asignar", new { idMesa = item.Mesa.Id })" class="btn btn-primary">Asignar mesa</a>
                         }
                         else if (item.Estado == MesaStateReferences.Reservada)
                         {

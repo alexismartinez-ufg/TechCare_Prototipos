@@ -11,12 +11,14 @@ namespace TechCare_Prototipos.Controllers
     public class AdministracionController : Controller
     {
         private readonly IMesasRepository mesasRepository;
+        private readonly IReservasRepository reservasRepository;
         private readonly IZonasRepository zonasRepository;
 
-        public AdministracionController(IMesasRepository _mesasRepository, IZonasRepository _zonasRepository)
+        public AdministracionController(IMesasRepository _mesasRepository, IZonasRepository _zonasRepository, IReservasRepository _reservasRepository)
         {
             mesasRepository = _mesasRepository;
             zonasRepository = _zonasRepository;
+            reservasRepository = _reservasRepository;
         }
 
         public async Task<IActionResult> Index(MesasViewModel model)
@@ -58,7 +60,9 @@ namespace TechCare_Prototipos.Controllers
             try
             {
                 var mesa = await mesasRepository.GetByIdAsync(idMesa);
-                
+
+                await reservasRepository.DeleteReservasByMesaId(mesa.Id);
+
                 if (mesa != null)
                     await mesasRepository.DeleteAsync(mesa);
                 ViewBag.SuccessMessage = "Mesa eliminada correctamente";

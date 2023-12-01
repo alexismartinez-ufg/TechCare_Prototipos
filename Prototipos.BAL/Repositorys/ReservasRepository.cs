@@ -15,6 +15,19 @@ namespace Prototipos.BAL.Repositorys
             dbContext = _dbContext;
         }
 
+        public async Task<bool> DeleteReservasByMesaId(int idMesa)
+        {
+            var reservas = dbContext.Reservas.Where(x=>x.IdMesa == idMesa).ToList();
+            var cuentas = dbContext.Cuentas.Where(x=>x.IdMesa == idMesa).ToList();
+
+            dbContext.Reservas.RemoveRange(reservas);
+            dbContext.Cuentas.RemoveRange(cuentas);
+
+            await dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<bool> DoReserva(ReservaViewModel model)
         {
             var succes = false;

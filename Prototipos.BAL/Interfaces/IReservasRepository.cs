@@ -6,5 +6,7 @@ namespace Prototipos.BAL.Interfaces
     public interface IReservasRepository : IRepository<Reserva>
     {
         Task<bool> DoReserva(ReservaViewModel model);
+
+        Task<bool> DeleteReservasByMesaId(int idMesa);
     }
 }

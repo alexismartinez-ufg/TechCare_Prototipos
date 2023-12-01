@@ -45,15 +45,12 @@ namespace TechCare_Prototipos.Controllers
         {
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-            if (idMesa >0)
-                return View(new CrearCuentaViewModel
-                {   
-                    Mesa = await mesasRepository.GetByIdAsync(idMesa),
-                    Reserva = await mesasRepository.GetReservaInfo(idMesa),
-                    Mesero = await usuariosRepository.GetByIdAsync(int.Parse(userId))
-                });
-
-            return View();
+            return View(new CrearCuentaViewModel
+            {
+                Mesa = await mesasRepository.GetByIdAsync(idMesa),
+                Reserva = await mesasRepository.GetReservaInfo(idMesa),
+                Mesero = await usuariosRepository.GetByIdAsync(int.Parse(userId))
+            });
         }
 
         [HttpPost]
